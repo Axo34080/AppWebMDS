@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
+import { useCart } from "../context/CartContext"
 
 interface Product {
   id: number
@@ -16,8 +17,10 @@ interface Product {
 
 function ProductDetail() {
   const { id } = useParams()
+  const { addToCart } = useCart()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
+  const [added, setAdded] = useState(false)
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
@@ -88,8 +91,20 @@ function ProductDetail() {
             {product.description}
           </p>
 
-          <button className="w-full md:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg transition-colors">
-            Ajouter au panier
+          <button
+            onClick={() => {
+              addToCart({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                image: product.image
+              })
+              setAdded(true)
+              setTimeout(() => setAdded(false), 2000)
+            }}
+            className="w-full md:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg transition-colors"
+          >
+            {added ? "✓ Ajouté au panier" : "Ajouter au panier"}
           </button>
         </div>
       </div>
