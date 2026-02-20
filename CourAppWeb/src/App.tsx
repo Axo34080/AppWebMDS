@@ -7,6 +7,7 @@ import Counter from './pages/Counter'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Cart from './pages/Cart'
+import Todo from './pages/Todo'
 import CartDropdown from './components/CartDropdown'
 
 function Navigation() {
@@ -45,6 +46,12 @@ function Navigation() {
               className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all"
             >
               Produits
+            </Link>
+            <Link
+              to="/todo"
+              className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all"
+            >
+              Todo
             </Link>
           </div>
 
@@ -89,6 +96,7 @@ function App() {
                 <Route path="/counter" element={<Counter />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/todo" element={<Todo />} />
                 <Route path="/cart" element={<Cart />} />
               </Routes>
             </div>
