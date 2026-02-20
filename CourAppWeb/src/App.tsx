@@ -7,7 +7,7 @@ import Counter from './pages/Counter'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Cart from './pages/Cart'
-import Todo from './pages/Todo'
+import Todo from './Views/Todo'
 import CartDropdown from './components/CartDropdown'
 
 function Navigation() {

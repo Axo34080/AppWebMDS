@@ -1,35 +1,8 @@
-import { useState } from "react"
+import { useTodoViewModel } from "../ViewModels/useTodoViewModel"
 
-// Structure d'une tâche : identifiant unique, texte et état (faite ou non)
-interface TodoItem {
-  id: number
-  text: string
-  done: boolean
-}
-
+// View : uniquement le JSX, aucune logique — tout vient du ViewModel
 function Todo() {
-  const [input, setInput] = useState("")
-  // Liste des tâches, typée avec l'interface TodoItem
-  const [todos, setTodos] = useState<TodoItem[]>([])
-
-  // Ajoute une nouvelle tâche à la liste si l'input n'est pas vide,
-  // puis réinitialise l'input
-  function handleAdd() {
-    const trimmed = input.trim()
-    if (!trimmed) return
-    setTodos([...todos, { id: Date.now(), text: trimmed, done: false }])
-    setInput("")
-  }
-
-  // Inverse l'état "done" de la tâche correspondant à l'id reçu
-  function handleToggle(id: number) {
-    setTodos(todos.map((todo) => todo.id === id ? { ...todo, done: !todo.done } : todo))
-  }
-
-  // Supprime la tâche correspondant à l'id reçu de la liste
-  function handleDelete(id: number) {
-    setTodos(todos.filter((todo) => todo.id !== id))
-  }
+  const { input, setInput, todos, handleAdd, handleToggle, handleDelete } = useTodoViewModel()
 
   return (
     <div className="max-w-lg mx-auto">
