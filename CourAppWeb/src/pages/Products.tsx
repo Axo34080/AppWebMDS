@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useCart } from "../context/CartContext"
 
+// Structure d'un produit retourné par l'API (version simplifiée pour la liste)
 interface Product {
     id: number
     title: string
@@ -9,10 +10,13 @@ interface Product {
     image: string
 }
 
+// Page Produits : récupère la liste depuis l'API au montage et l'affiche en grille
 function Products() {
+    // Liste des produits chargés depuis l'API
     const [products, setProducts] = useState<Product[]>([])
     const { addToCart } = useCart()
 
+    // Appel API au montage du composant (tableau vide = une seule fois)
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
             .then(res => res.json())

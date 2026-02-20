@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 
+// Page Panier : liste les articles ajoutés, permet de modifier les quantités,
+// supprimer des articles, vider le panier et affiche le total
 function Cart() {
+  // Récupère les données et actions du panier depuis le contexte global
   const { cartItems, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart()
 
   if (cartItems.length === 0) {

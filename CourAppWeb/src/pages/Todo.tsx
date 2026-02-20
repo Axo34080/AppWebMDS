@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+// Structure d'une tâche : identifiant unique, texte et état (faite ou non)
 interface TodoItem {
   id: number
   text: string
@@ -8,8 +9,11 @@ interface TodoItem {
 
 function Todo() {
   const [input, setInput] = useState("")
+  // Liste des tâches, typée avec l'interface TodoItem
   const [todos, setTodos] = useState<TodoItem[]>([])
 
+  // Ajoute une nouvelle tâche à la liste si l'input n'est pas vide,
+  // puis réinitialise l'input
   function handleAdd() {
     const trimmed = input.trim()
     if (!trimmed) return
@@ -17,10 +21,12 @@ function Todo() {
     setInput("")
   }
 
+  // Inverse l'état "done" de la tâche correspondant à l'id reçu
   function handleToggle(id: number) {
     setTodos(todos.map((todo) => todo.id === id ? { ...todo, done: !todo.done } : todo))
   }
 
+  // Supprime la tâche correspondant à l'id reçu de la liste
   function handleDelete(id: number) {
     setTodos(todos.filter((todo) => todo.id !== id))
   }

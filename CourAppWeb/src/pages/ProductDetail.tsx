@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useCart } from "../context/CartContext"
 
+// Structure complète d'un produit (avec description, catégorie et note)
 interface Product {
   id: number
   title: string
@@ -15,13 +16,20 @@ interface Product {
   }
 }
 
+// Page de détail d'un produit : récupère le produit par son id depuis l'URL,
+// affiche ses informations complètes et permet de l'ajouter au panier
 function ProductDetail() {
+  // Récupère le paramètre :id depuis l'URL (ex: /products/3)
   const { id } = useParams()
   const { addToCart } = useCart()
+  // Produit chargé depuis l'API, null si pas encore reçu
   const [product, setProduct] = useState<Product | null>(null)
+  // true pendant le chargement pour afficher un indicateur
   const [loading, setLoading] = useState(true)
+  // Bascule à true 2 secondes après un ajout au panier pour feedback visuel
   const [added, setAdded] = useState(false)
 
+  // Charge le produit correspondant à l'id dès que celui-ci change
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then(res => res.json())

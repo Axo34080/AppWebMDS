@@ -1,16 +1,23 @@
 import { useState } from 'react'
 
+// Page de connexion / inscription : bascule entre les deux modes via un bouton,
+// valide les champs côté client, puis envoie les données à l'API
 function FormPage() {
+  // true = mode inscription, false = mode connexion
   const [isSignup, setIsSignup] = useState(false)
+  // Données des champs du formulaire regroupées dans un objet
   const [formData, setFormData] = useState({
     email: '',
     username: '',
     password: '',
     confirmPassword: ''
   })
+  // Indique si une requête est en cours (désactive le bouton pendant l'appel API)
   const [loading, setLoading] = useState(false)
+  // Message d'erreur à afficher sous le formulaire
   const [error, setError] = useState('')
 
+  // Met à jour dynamiquement le champ correspondant à l'input modifié
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -18,7 +25,9 @@ function FormPage() {
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Valide les champs, assainit les données, puis envoie la requête à l'API
+  // Valide les champs, assainit les données, puis envoie la requête à l'API
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -78,6 +87,7 @@ function FormPage() {
     }
   }
 
+  // Bascule entre connexion et inscription, et réinitialise le formulaire
   const toggleMode = () => {
     setIsSignup(!isSignup)
     setFormData({ email: '', username: '', password: '', confirmPassword: '' })

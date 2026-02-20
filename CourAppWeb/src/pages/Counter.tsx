@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
 
+// Page Compteur : affiche un nombre et permet de l'incrémenter manuellement ou automatiquement
 function Counter() {
+  // Valeur actuelle du compteur
   const [count, setCount] = useState(0)
+
+  // Déclenche l'auto-incrément à chaque changement de count
   useEffect(() => {
    incrementCounter()
   }, [count]);
@@ -24,6 +28,7 @@ function Counter() {
     </div>
   )
 
+  // Incrémente automatiquement le compteur de 1 après 1 seconde
   function incrementCounter() {
     setTimeout(() => {
       setCount(count + 1)
